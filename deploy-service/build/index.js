@@ -14,6 +14,8 @@ const aws_1 = require("./aws");
 const utils_1 = require("./utils");
 const subscriber = (0, redis_1.createClient)();
 subscriber.connect();
+const publisher = (0, redis_1.createClient)();
+publisher.connect();
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         while (true) {
@@ -27,6 +29,7 @@ function main() {
             console.log("build complete for id:", id);
             yield (0, aws_1.copyFinalDist)(id);
             console.log("build file upload to s3 completed");
+            publisher.hSet("status", id, "deployed");
         }
     });
 }

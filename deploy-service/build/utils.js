@@ -7,7 +7,6 @@ exports.buildProject = void 0;
 const child_process_1 = require("child_process");
 const path_1 = __importDefault(require("path"));
 function buildProject(id) {
-    console.log("entering for the build");
     return new Promise((resolve) => {
         var _a, _b;
         const child = (0, child_process_1.exec)(`cd ${path_1.default.join(__dirname, `output/${id}`)} && npm install && npm run build`);

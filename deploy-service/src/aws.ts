@@ -8,14 +8,13 @@ const s3 = new S3({
     endpoint: "https://62e0a68f6c81bf4eea27ec2e871e51f4.r2.cloudflarestorage.com"
 })
 
-
 export async function downloadS3Folder(prefix: string) {
     const allFiles = await s3.listObjectsV2({
         Bucket: "vercel",
         Prefix: prefix
     }).promise();
     
-    
+    // 
     const allPromises = allFiles.Contents?.map(async ({Key}) => {
         return new Promise(async (resolve) => {
             if (!Key) {
@@ -40,7 +39,6 @@ export async function downloadS3Folder(prefix: string) {
 
     await Promise.all(allPromises?.filter(x => x !== undefined));
 }
-
 export function copyFinalDist(id: string) {
     const folderPath = path.join(__dirname, `output/${id}/dist`);
     const allFiles = getAllFiles(folderPath);

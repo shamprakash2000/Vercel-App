@@ -28,6 +28,7 @@ function downloadS3Folder(prefix) {
             Bucket: "vercel",
             Prefix: prefix
         }).promise();
+        // 
         const allPromises = ((_a = allFiles.Contents) === null || _a === void 0 ? void 0 : _a.map((_b) => __awaiter(this, [_b], void 0, function* ({ Key }) {
             return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
                 if (!Key) {
